@@ -8,6 +8,7 @@
       - curl
       - htop
       - apache2
+      - libapache2-mod-php
   tasks:
     - name: Change password for default user
       user:
@@ -25,8 +26,4 @@
     - name: All done!
       debug:
         msg: Packages have been successfully installed
-    - name: add php  support for apache
-      apt:
-        name:  libapache2-mod-php
-        state: latest
 
