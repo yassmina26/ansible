@@ -27,3 +27,9 @@
       debug:
         msg: Packages have been successfully installed
 
+- hosts: web_hosts
+  become: 'yes'
+  tasks:
+    - name: installation of DNS
+      apt: 
+      name: bind9
