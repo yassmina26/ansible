@@ -1,0 +1,5 @@
+- name: installation of DNS
+  apt:
+    name: bind9
+
+

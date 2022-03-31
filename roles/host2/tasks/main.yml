@@ -1,0 +1,7 @@
+- name: create yassmine user
+  tags: userr
+  user:
+    name: yassmine
+    groups: root
+
+
