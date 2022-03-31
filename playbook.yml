@@ -2,13 +2,6 @@
   become: 'yes'
   vars:
     user:
-    packages:
-      - vim
-      - wget
-      - curl
-      - htop
-      - apache2
-      - libapache2-mod-php
   tasks:
     - name: install packages (centOS)
       dnf:
@@ -29,16 +22,24 @@
         enabled: yes
     - name: Ensure a list of packages installed
       apt:
-        name:  "{{ packages }}"
+        name:
+          - apache2
+          - libapache2-mod-php
         state: present
-    - name: share file
-      tags: file
-      copy: 
-        src: /var/www/html/index.html
-        dest: /var/www/html/index.html
     - name: All done!
       debug:
         msg: Packages have been successfully installed
+
+- hosts: all
+  become: 'yes'
+  tasks:
+
+  - name: create yassmine user
+    tags: userr
+    user:
+      name: yassmine
+      groups: root
+
 
 #- hosts: web_hosts
  # become: 'yes'
