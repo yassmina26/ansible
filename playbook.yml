@@ -1,49 +1,14 @@
-- hosts: all
+- hosts: hosts
   become: 'yes'
-  vars:
-    user:
-  tasks:
-    - name: install packages (centOS)
-      dnf:
-        update_only: yes 
-        update_cache: yes 
-      when: ansible_distribution == "CentOS"
-    
-    - name: Change password for default user
-      user:
-        name:  "pi"
-        password:  " secret | password_hash('sha512')"
-        state: present
-    - name: Starting a service 
-      tags: service, apache 
-      service:
-        name: apache2 
-        state: started
-        enabled: yes
-    - name: Ensure a list of packages installed
-      apt:
-        name:
-          - apache2
-          - libapache2-mod-php
-        state: present
-    - name: All done!
-      debug:
-        msg: Packages have been successfully installed
+  roles: 
+    - hosts
 
-- hosts: all
+- hosts: host2
   become: 'yes'
-  tasks:
+  roles:
+    - host2 
 
-  - name: create yassmine user
-    tags: userr
-    user:
-      name: yassmine
-      groups: root
-
-
-#- hosts: web_hosts
- # become: 'yes'
-  #tasks:
-   # - name: installation of DNS
-    # apt: 
-     # name: bind9
+- hosts: web_hosts
+  become: 'yes' 
+  roles:
+    - web_hosts
